@@ -10,7 +10,7 @@ void print_binary(double d){
 
 	unsigned long long *double_int = (unsigned long long *)&d;
 	int i;
-	for(i=0;i<=67;i++)
+	for(i=0;i<=63;i++)
 	{
 		if(i==1){
 			printf (" ");
@@ -18,7 +18,7 @@ void print_binary(double d){
 		if(i==12){
 			printf(" ");
 		}
-		if((*double_int >> (67-i)) & 1)
+		if((*double_int >> (63-i)) & 1)
 			printf("1");
 		else
 			printf("0");
@@ -39,7 +39,7 @@ int main(){
 	
 	printf("Zaokraglenie round to even, domyślne\n");
 	unsigned short int controlword1 = ReadControlWord();
-	printf("%d\n", controlword1);
+	printf("Binarna reprezentacja rejestru sterującego: \n");
 	print_binary_controlWord(controlword1);
 	printf("\n");
  	double result=doAdd();
@@ -49,7 +49,7 @@ int main(){
 	printf("Zaokraglenie do plus nieskonczonosci\n");
 	double test = changeRCup();
 	unsigned short int controlword = ReadControlWord();
-	printf("%d\n",controlword);
+	printf("Binarna reprezentacja rejestru sterującego: \n");
 	print_binary_controlWord(controlword);
 	printf("\n");
 	printf("%.17g\n",test);
@@ -59,7 +59,7 @@ int main(){
 	printf ("Zaokrąglenie do minus nieskończoności\n");
 	double test2=changeRCdown();
 	unsigned short int controlword3 = ReadControlWord();
-	printf("%d\n", controlword3);
+	printf("Binarna reprezentacja rejestru sterującego: \n");
 	print_binary_controlWord(controlword3);
 	printf("\n");
 	printf("%.17g\n",test2);

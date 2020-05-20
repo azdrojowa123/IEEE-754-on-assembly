@@ -22,7 +22,7 @@ int main(){
 	unsigned short int status,status2;
 	PrecisionFlag();
 	status=ReadStatusRegister();
-	printf("Flagi ustawione po operacji mającej wywołać precision flag: \n");
+	printf("Flagi ustawione po operacji mającej wywołać precision flag:  \n");
 	flag_check(status,0);
 	flag_check(status,1);
 	flag_check(status,2);
@@ -31,7 +31,7 @@ int main(){
 	flag_check(status,5);
 	ZeroDivideFlag();
 	status2=ReadStatusRegister();
-	printf("Flagi ustawione po operacji mającej wywołać zero divide flag \n");
+	printf("Flagi ustawione po operacji mającej wywołać zero divide flag:  \n");
 	flag_check(status2,0); //invalid operation
 	flag_check(status2,1); //denormalized
 	flag_check(status2,2); //zero divide

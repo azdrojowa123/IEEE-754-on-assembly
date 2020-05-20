@@ -22,21 +22,33 @@ extern  bool flag_check(unsigned short int status, int index){
 	}
 }
 
+void print_binary(unsigned short int d){
+	
+	int i;
+	for(i=15;i>=0;i--){
+		printf("%d",(d>>i)&1);
+	}
+	printf("\n");
+}
+
 int main(){
 	
 	int a=12;
 	unsigned short int status, controlword;
 	status = ReadStatusRegister();
 	controlword= ReadControlWord();
-	
-	printf("%d\n",controlword);
-	printf("%d\n", status);
+ 	printf("Binarna wartość rejestru sterującego koprocesora: \n");
+	print_binary(controlword);
+	printf("Binarna wartość rejestru statusowego: \n");
+	print_binary(status);
 
 	flag_check(status,3);
-
+	
+	printf("Operacja zmiany określonych bitów w rejestrze sterującym: \n");
 	SaveControlWord(a);
 	controlword = ReadControlWord();
-	printf("%d\n",controlword);
+	printf("Binarna wartość rejestru sterującego koprocesora po zmianie: \n");
+	print_binary(controlword);
 
 
 	return 0;

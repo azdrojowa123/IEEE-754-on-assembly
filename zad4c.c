@@ -1,64 +1,54 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-float changePC();
-double defaultPC();
+
+void changePC(char *ptr);
+void defaultPC(char *ptr);
 unsigned short int ReadControlWord();
 
 void print_binary_controlWord(unsigned short int cw){
-	for(int i=15;i>=0;i--){
+	
+	int i;
+	for(i=15;i>=0;i--){
 		printf("%d",(cw>>i)&1);
 	}
 	printf("\n");
 }
 
-void print_binary_single(float cw){
-	int i;
-	unsigned long *float_int = (unsigned long *)&cw;
-	for(i=0;i<=31;i++){
-		if(i==1){
-			printf(" ");
-		}
-		if(i==9){
-			printf(" ");
-		}
-		if((*float_int >> (31-i)) & 1)
-				printf("1");
-		else
-				printf("0");
-	}
-	printf("\n");
-}
+void print_binary_extended(char *d){
 
-void print_binary_double(double d){
-	int i;
-	unsigned long long *double_int=(unsigned long long *)&d;
-	for(i=0;i<=63;i++){
-		if(i==1){
-			printf(" ");}
-		if(i==12){
-			printf(" ");}
-		if((*double_int >> (63-i)) & 1){
+	int i,j;
+	for(j=9;j>=0;j--){
+
+	for(i=0;i<=7;i++){
+		if(j==9 && i==1)
+			printf(" ");
+		else if(j==7 && i==0)
+			printf(" ");
+		else if(j==7 && i==1)
+			printf(" ");
+		if((d[j] >> (7-i)) & 1){
 			printf("1");
 		}else{
 			printf("0");}
+	}
 	}
 	printf("\n");
 }
 
 int main(){
 	
+	char zmienna[10];
 	printf("Binarna wartosc rejestru serującego przed zamianą precyzji: \n");
 	unsigned short int control = ReadControlWord();
 	print_binary_controlWord(control);
-	double wynik1 = defaultPC();
-	print_binary_double(wynik1);
-	printf("%.20g\n",wynik1);
-	float  wynik = changePC();
+	defaultPC(zmienna);
+	print_binary_extended(zmienna);
+	changePC(zmienna);
 	unsigned short int control1 = ReadControlWord();
-	printf("Binarna wartosc rejestru sterującego: \n");
+	printf("Binarna wartosc rejestru sterującego po zmiane precyzji (pojedyncza): \n");
 	print_binary_controlWord(control1);
-	printf("%.20g\n",wynik);
-	print_binary_single(wynik);
+	print_binary_extended(zmienna);
 	return 0;
 
 }

@@ -16,11 +16,12 @@ push %esi
  
 
 FINIT
-FLD1
 FLDPI
 FLDL2T
+FLD1
 FLDLG2
-FLDPI
+FLD1
+
 
 Timer 
 movl %eax, %esi
@@ -48,10 +49,11 @@ push %ebx
 push %esi
 
 FINIT
+FLDPI
+FLDl2T 
 FLD1
-FLDPI 
-FLDL2T
 FLDLG2
+FLD1
 
 Timer 
 movl %eax, %esi
